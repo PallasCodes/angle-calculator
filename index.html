@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solar Pane Optimal Angle Calculator</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <main>
+    <h1>Solar Panel Tilt Angle Calculator</h1>
+    <br>
+    <form id="calculator">
+    <div>
+      <label for="angle">Type your horizontal angle</label>
+      <input id="angle" name="angle"></input>
+    </div>
+    <button id="calculate" type="submit">Use your current location</button>
+  </form>
+
+  <section id="results">
+    <h2>Your optimal year-round tilt angle:</h2>
+    <p id="year"></p>
+    <h2>Your optimal tilt angles by season:</h2>
+    <ol>
+      <li>Spring: <span id="spring"></span></li>
+      <li>Summer: <span id="summer"></span></li>
+      <li>Fall: <span id="fall"></span></li>
+      <li>Winter: <span id="winter"></span></li>
+    </ol>
+    <h2>Your optimal tilt angles by month:</h2>
+    <ol>
+      <li>January: <span id="january"></span></li>
+      <li>February: <span id="february"></span></li>
+      <li>March: <span id="march"></span></li>
+      <li>April: <span id="april"></span></li>
+      <li>May: <span id="may"></span></li>
+      <li>June: <span id="june"></span></li>
+      <li>July: <span id="july"></span></li>
+      <li>August: <span id="august"></span></li>
+      <li>September: <span id="september"></span></li>
+      <li>October: <span id="october"></span></li>
+      <li>November: <span id="november"></span></li>
+      <li>December: <span id="december"></span></li>
+    </ol>
+  </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
