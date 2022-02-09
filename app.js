@@ -2,9 +2,15 @@ const calculator = document.getElementById('calculator')
 const calculateBtn = document.getElementById('calculate')
 let latitude = 0
 
-calculator.addEventListener('submit', ( ) => {
-  event.preventDefault()
+calculateBtn.addEventListener('click', ( ) => {
   navigator.geolocation.getCurrentPosition(success, error, options)
+})
+
+calculator.addEventListener('submit', async () => {
+  event.preventDefault()
+  latitude = await fetchLocation(calculator.zipcode.value)
+  console.log(latitude)
+  displayAngles(latitude)
 })
 
 function calcAngleOptimalYear(x) {
@@ -21,9 +27,7 @@ const options = {
   maximumAge: 0
 }
 
-function success(pos) {
-  const crd = pos.coords
-  latitude = crd.latitude
+function displayAngles(latitude) {
   const optimalAngleYear =  Math.round(calcAngleOptimalYear(latitude) * 10) / 10
   //  YEAR
   document.getElementById('year').textContent = optimalAngleYear
@@ -49,7 +53,22 @@ function success(pos) {
   document.getElementById('results').style.display = 'block'
 }
 
+function success(pos) {
+  const crd = pos.coords
+  latitude = crd.latitude
+  displayAngles(latitude)
+}
+
 function error(err) {
   console.warn('ERROR(' + err.code + '): ' + err.message)
 }
 
+async function fetchLocation(zipcode) {
+  try {
+    let locations = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&key=AIzaSyA_a8F8dM6M27PIiWFYDt0QS3BRYS458CA`)
+    locations = await locations.json()
+    return locations.results[0].geometry.location.lat
+  } catch (error) {
+    console.error(error)
+  }
+}
