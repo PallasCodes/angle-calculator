@@ -1,18 +1,29 @@
+// form that contains the zip code input and the search button
 const calculator = document.getElementById('calculator')
+// button to get the optimal angles base on the user's current location
 const calculateBtn = document.getElementById('calculate')
+// used to store the latitude in both methods
 let latitude = 0
 
 calculateBtn.addEventListener('click', ( ) => {
+  document.getElementById('errorMsg').textContent = ''
   navigator.geolocation.getCurrentPosition(success, error, options)
 })
 
 calculator.addEventListener('submit', async () => {
   event.preventDefault()
-  latitude = await fetchLocation(calculator.zipcode.value)
-  console.log(latitude)
-  displayAngles(latitude)
+  if (calculator.zipcode.value === '') {
+    document.getElementById('errorMsg').textContent = '*Type a zip code or address'
+  } else {
+    latitude = await getLatitude(calculator.zipcode.value)
+    if(latitude) {
+      document.getElementById('errorMsg').textContent = ''
+      displayAngles(latitude)
+    }
+  }
 })
 
+// formula to get the optimal year angle
 function calcAngleOptimalYear(x) {
   if (x >= 0) {
     return 1.3793 + x * (1.2011 + x * (-0.014404 + x * 0.000080509))
@@ -21,12 +32,14 @@ function calcAngleOptimalYear(x) {
   }
 }
 
+// options for the API to get the user's current location
 const options = {
   enableHighAccuracy: true,
   timeout: 5000,
   maximumAge: 0
 }
 
+// gets the latitude, calls the optimalAngleYear function, then calculates each angle and displays it on screen
 function displayAngles(latitude) {
   const optimalAngleYear =  Math.round(calcAngleOptimalYear(latitude) * 10) / 10
   //  YEAR
@@ -50,24 +63,34 @@ function displayAngles(latitude) {
   document.getElementById('november').textContent = Math.round((optimalAngleYear+10) * 10) / 10
   document.getElementById('december').textContent = Math.round((optimalAngleYear+15) * 10) / 10
   // MAKE RESULTS VISIBLE
-  document.getElementById('results').style.display = 'block'
+  document.getElementById('results').classList.add('active')
+  document.getElementById('angleCalculator').classList.add('active')
 }
 
+// called when the user allows to get his current location
 function success(pos) {
   const crd = pos.coords
   latitude = crd.latitude
   displayAngles(latitude)
 }
 
+// called when the user won't allow to get his current location
 function error(err) {
   console.warn('ERROR(' + err.code + '): ' + err.message)
+  document.getElementById('errorMsg').textContent = '*Please grant permissions to access your location to calculate your optimal angle.'
 }
 
-async function fetchLocation(zipcode) {
+// Gooogle's Geocoding API call to get the latitude of the zip code or address
+async function getLatitude(zipcode) {
   try {
     let locations = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&key=AIzaSyA_a8F8dM6M27PIiWFYDt0QS3BRYS458CA`)
     locations = await locations.json()
-    return locations.results[0].geometry.location.lat
+    if(locations.results.length === 0) {
+      document.getElementById('errorMsg').textContent = "*We couldn't find the given zip code or address"
+      return false
+    } else {
+      return locations.results[0].geometry.location.lat
+    }
   } catch (error) {
     console.error(error)
   }
