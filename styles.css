@@ -15,7 +15,7 @@ html {
 	padding: 1.5rem 2rem;
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	border-radius: 10px;
-	max-width: 600px;
+	max-width: 620px;
 	margin: 5rem auto;
 	font-family: 'Poppins';
 	overflow: hidden;
@@ -39,7 +39,7 @@ button:hover {
 	width: 100%;
 	max-width: 300px;
 	margin: 0 auto;
-	background: #3498db;
+	background: #f1c40f;
 	outline: none;
 	border: none;
 	padding: 10px 0;
@@ -54,7 +54,7 @@ button:hover {
 }
 
 #calculate:hover {
-	background: #2980b9;
+	background: #e2cc03;
 }
 
 label {
@@ -70,9 +70,17 @@ h2 {
 	margin-bottom: 0;
 }
 
-h1 {
+#title {
 	text-align: center;
 	color: #111;
+	font-size: 1.5rem;
+}
+
+#subtitle {
+	text-align: center;
+	color: #222;
+	font-weight: 600;
+	font-size: 1.25rem;
 }
 
 ol li {
@@ -94,6 +102,11 @@ li span {
 	border: none;
 	outline: none;
 	width: 100%;
+	background: transparent;
+}
+
+#zipcode:active, #zipcode:focus {
+	background: transparent;
 }
 
 #zipcodeInput {
@@ -153,5 +166,12 @@ li span {
 #errorMsg {
 	text-align: center;
 	font-weight: 500;
-	color: rgb(156, 65, 42);
+	color: #e74c3c;
+}
+
+#anglesImg {
+	width: 100%;
+	height: auto;
+	display: block;
+	margin-top: 2rem;
 }

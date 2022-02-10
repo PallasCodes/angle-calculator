@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Solar Pane Optimal Angle Calculator</title>
+  <title>Calculate the best angle for you solar panel</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,9 +12,10 @@
 </head>
 <body>
   <div id="angleCalculator">
-    <h1>Solar Panel Tilt Angle Calculator</h1>
+    <h1 id="title">Calculate the best angle for you solar panel</h1>
+    <h1 id="subtitle">By your location and time of year</h1>
     <br>
-    <form id="calculator">
+    <form id="calculator" autocomplete="off">
     <div id="zipcodeInput">
       <input id="zipcode" name="zipcode" placeholder="Zip Code or Address"></input>
       <button type="submit" id="searchBtn"><svg xmlns="http://www.w3.org/2000/svg" id="search" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -25,35 +26,37 @@
   <p id="or">or</p>
   <button id="calculate">Use your current location</button>
   <h4 id="errorMsg"></h4>
+  <img src="/angles.png" alt="Illustrative sample angles" id="anglesImg">
 
   <section id="results">
     <h2>Your optimal year-round tilt angle:</h2>
-    <p id="year"></p>
+    <p id="year"><span>°</span></p>
     <h2>Your optimal tilt angles by season:</h2>
     <ol>
-      <li>Spring: <span id="spring"></span></li>
-      <li>Summer: <span id="summer"></span></li>
-      <li>Fall: <span id="fall"></span></li>
-      <li>Winter: <span id="winter"></span></li>
+      <li>Spring: <span id="spring"></span><span>°</span></li>
+      <li>Summer: <span id="summer"></span><span>°</span></li>
+      <li>Fall: <span id="fall"></span><span>°</span></li>
+      <li>Winter: <span id="winter"></span><span>°</span></li>
     </ol>
     <h2>Your optimal tilt angles by month:</h2>
     <ol>
-      <li>January: <span id="january"></span></li>
-      <li>February: <span id="february"></span></li>
-      <li>March: <span id="march"></span></li>
-      <li>April: <span id="april"></span></li>
-      <li>May: <span id="may"></span></li>
-      <li>June: <span id="june"></span></li>
-      <li>July: <span id="july"></span></li>
-      <li>August: <span id="august"></span></li>
-      <li>September: <span id="september"></span></li>
-      <li>October: <span id="october"></span></li>
-      <li>November: <span id="november"></span></li>
-      <li>December: <span id="december"></span></li>
+      <li>January: <span id="january"></span><span>°</span></li>
+      <li>February: <span id="february"></span><span>°</span></li>
+      <li>March: <span id="march"></span><span>°</span></li>
+      <li>April: <span id="april"></span><span>°</span></li>
+      <li>May: <span id="may"></span><span>°</span></li>
+      <li>June: <span id="june"></span><span>°</span></li>
+      <li>July: <span id="july"></span><span>°</span></li>
+      <li>August: <span id="august"></span><span>°</span></li>
+      <li>September: <span id="september"></span><span>°</span></li>
+      <li>October: <span id="october"></span><span>°</span></li>
+      <li>November: <span id="november"></span><span>°</span></li>
+      <li>December: <span id="december"></span><span>°</span></li>
     </ol>
   </section>
   </main>
 
   <script src="app.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyA_a8F8dM6M27PIiWFYDt0QS3BRYS458CA"></script>
 </body>
 </html>
